@@ -1,15 +1,15 @@
 {
     "layer": "top",
-    "margin-top": 15,
+    "margin-top": 10,
     "width": 1880,
     "spacing": 4,
 
     "modules-left": [
-        "hyprland/workspaces",
-        "hyprland/scratchpad",
+        "niri/workspaces",
+        "niri/scratchpad",
     ],
     "modules-center": [
-        "hyprland/window"
+        "niri/window"
     ],
     "modules-right": [
         "pulseaudio",
@@ -20,7 +20,7 @@
         "custom/power",
     ],
 
-     "hyprland/workspaces": {
+     "niri/workspaces": {
          "disable-scroll": true,
          "all-outputs": true,
          "warp-on-scroll": false,
@@ -42,11 +42,11 @@
         }
     },
 
-    "hyprland/mode": {
+    "niri/mode": {
         "format": "<span style=\"italic\">{}</span>"
     },
 
-    "hyprland/scratchpad": {
+    "niri/scratchpad": {
         "format": "{icon} {count}",
         "show-empty": false,
         "format-icons": ["", ""],
