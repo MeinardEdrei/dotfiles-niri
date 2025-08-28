@@ -1,12 +1,11 @@
 {
     "layer": "top",
-    "margin-top": 10,
-    "width": 1880,
+    // "margin-top": 10,
+    "width": 1890,
     "spacing": 4,
 
     "modules-left": [
         "niri/workspaces",
-        "niri/scratchpad",
     ],
     "modules-center": [
         "niri/window"
@@ -17,7 +16,6 @@
         "custom/notification",
         "battery",
         "clock",
-        "custom/power",
     ],
 
      "niri/workspaces": {
@@ -44,14 +42,6 @@
 
     "niri/mode": {
         "format": "<span style=\"italic\">{}</span>"
-    },
-
-    "niri/scratchpad": {
-        "format": "{icon} {count}",
-        "show-empty": false,
-        "format-icons": ["", ""],
-        "tooltip": true,
-        "tooltip-format": "{app}: {title}"
     },
 
     "idle_inhibitor": {
