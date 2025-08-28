@@ -190,7 +190,7 @@ layout {
 
         width 4
         active-color "#0a0a0a"
-        inactive-color "#505050"
+        inactive-color "#333333"
 
         // Color of the border around windows that request your attention.
         urgent-color "#9b0000"
@@ -561,8 +561,8 @@ binds {
     // Mod+Shift+Space { switch-layout "prev"; }
 
     // Print { screenshot; }
-   // Ctrl+Print { screenshot-screen; }
-   // Alt+Print { screenshot-window; }
+    Ctrl+Print { screenshot-screen; }
+    Alt+Print { screenshot-window; }
 
     // Applications such as remote-desktop clients and software KVM switches may
     // request that niri stops processing the keyboard shortcuts defined here
