@@ -6,7 +6,7 @@
     sidebar-mode: true;
 }
 
-@theme "~/dotfiles/rofi/themes/default.rasi"
+@theme "~/dotfiles-niri/rofi/themes/default.rasi"
 
 configuration {
     show-icons: true;
