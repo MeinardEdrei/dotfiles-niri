@@ -50,6 +50,7 @@ window#waybar.hidden {
   background-color: #f38ba8;
 }
 
+#bluetooth,
 #pulseaudio,
 #custom-notification,
 #custom-power,

@@ -13,7 +13,7 @@
     "modules-right": [
         "pulseaudio",
         "network",
-        "custom/notification",
+        "bluetooth",
         "battery",
         "clock",
     ],
@@ -34,6 +34,10 @@
              "default": ""
          }    
      },
+    "bluetooth": {
+        "format": "",
+        "on-click": "blueberry"
+    },
     "clock": {
         "interval": 60,
         "align": 0,
