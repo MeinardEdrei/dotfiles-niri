@@ -1,6 +1,5 @@
 {
     "layer": "top",
-    "margin-top": 5,
     "width": 1875,
     "spacing": 2,
 
@@ -19,6 +18,8 @@
     ],
 
     "niri/window": {
+        "all-outputs": true,
+        "format-alt": "",
         "align": "center",
         "max-length": 28,
         "min-length": 28,
