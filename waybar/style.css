@@ -70,12 +70,12 @@ window#waybar.hidden {
 }
 
 #battery.critical {
-  background-color: #ff4444; /* Bright Red */
+  border: 2px solid #ff4444; /* Bright Red */
   color: #161616;
 }
 
 #battery.warning {
-  background-color: #ff9900; /* Orange */
+  border: 2px solid #ff9900; /* Orange */
   color: #161616;
 }
 
@@ -85,8 +85,8 @@ window#waybar.hidden {
 }
 
 #battery.charging {
-  background-color: #a6e3a1; /* Soft Green */
-  color: #161616;
+  border: 2px solid #a6e3a1; /* Soft Green */
+  color: white;
 }
 
 #battery.plugged {
