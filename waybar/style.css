@@ -94,9 +94,9 @@ window#waybar.hidden {
   color: #161616;
 }
 
-#network {
-  padding-right: 17px;
-}
+/* #network { */
+/*   padding-right: 17px; */
+/* } */
 
 
 #custom-notification.urgent {
