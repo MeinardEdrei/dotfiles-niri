@@ -23,19 +23,17 @@
         "max-length": 28,
         "min-length": 28,
     },
-
-     "niri/workspaces": {
-         "disable-scroll": true,
-         "all-outputs": true,
-         "warp-on-scroll": false,
-         "format": "{icon}",
-         "format-icons": {
+    "niri/workspaces": {
+        "disable-scroll": true,
+        "all-outputs": true,
+        "warp-on-scroll": false,
+        "format": "{icon}",
+        "format-icons": {
              "urgent": "",
              "active": "",
              "default": ""
-         }
+         }    
      },
-
     "clock": {
         "interval": 60,
         "align": 0,
@@ -44,46 +42,6 @@
         "format": "{:%a %b %d, %I:%M %p}",
         "format-alt": "{:%a %b %d, %G}"
     },
-
-    "keyboard-state": {
-        "numlock": true,
-        "capslock": true,
-        "format": "{name} {icon}",
-        "format-icons": {
-            "locked": "",
-            "unlocked": ""
-        }
-    },
-
-    "niri/mode": {
-        "format": "<span style=\"italic\">{}</span>"
-    },
-
-    "idle_inhibitor": {
-        "format": "{icon}",
-        "format-icons": {
-            "activated": "",
-            "deactivated": ""
-        }
-    },
-
-    "cpu": {
-        "format": "{usage}% ",
-        "tooltip": false
-    },
-
-    "memory": {
-        "format": "{}% "
-    },
-
-    "temperature": {
-        // "thermal-zone": 2,
-        "critical-threshold": 80,
-        // "format-critical": "{temperatureC}°C {icon}",
-        "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""]
-    },
-
     "battery": {
         "interval": 5,
         "states": {
@@ -98,7 +56,6 @@
         "format-alt": "{time} {icon}",
         "format-icons": ["󰁻", "󰁽", "󰁿", "󰂁", "󰁹"],
     },
-
     "network": {
         "format-wifi": "    {essid}",
         "format-ethernet": "{ipaddr}/{cidr} ",
@@ -107,7 +64,6 @@
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {ipaddr}/{cidr}"
     },
-
     "pulseaudio": {
         "format": "{icon}   {volume}%",
         "format-bluetooth": "{volume}% {icon} {format_source}",
@@ -125,19 +81,5 @@
             "default": ["", "", ""]
         },
         "on-click": "pavucontrol"
-    },
-
-    "custom/notification": {
-        "format": "{text}",
-        "exec": "swaync-client -c | awk '{print \"{\\\"text\\\": \\\"\" ($1 > 0 ? \"󱅫\" : \"\") \"\\\", \\\"class\\\": \\\"\" ($1 > 0 ? \"has-notif\" : \"\") \"\\\"}\"}'",
-        "exec-if": "pgrep swaync",
-        "on-click": "swaync-client -t",
-        "return-type": "json",
-        "interval": 5,
-    },
-
-    "custom/power": {
-      "format": "",
-      "on-click": "~/dotfiles/rofi/scripts/power-menu.sh"
     },
 }
