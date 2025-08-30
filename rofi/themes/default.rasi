@@ -1,57 +1,163 @@
 * {
-    background: rgba(20, 20, 20, 0.7);
-    foreground: #ffffff;
-    selected: rgba(255, 255, 255, 0.15);
-    selected-text: #ffffff;
-    border-radius: 20px;
-    font: "JetBrainsMono Nerd Font Medium 12";
-    padding: 12px;
+    background-color: transparent;
+    text-color: #ffffff;
+    margin: 0px;
+    padding: 0px;
+    spacing: 0px;
+    font: "SF Pro Display 11"; /* slightly smaller font */
 }
 
 window {
+    transparency: "real";
     location: center;
-    width: 450px;
-    border: 1;
-    border-color: #ffffff;
-    background-color: @background;
+    anchor: center;
+    fullscreen: false;
+    width: 360px;  /* reduced width */
+    height: 420px; /* reduced height */
+    x-offset: 0px;
+    y-offset: 0px;
+    background-color: rgba(25, 25, 27, 0.95);
+    border: 1px;
+    border-color: rgba(255, 255, 255, 0.15);
+    border-radius: 24px; /* slightly smaller radius */
+    cursor: "default";
 }
 
 mainbox {
-    background-color: @background;
-    border-radius: @border-radius;
-    padding: 10px;
+    enabled: true;
+    spacing: 0px;
+    margin: 0px;
+    padding: 12px; /* reduced padding */
+    border: 0px;
+    border-radius: 0px;
+    background-color: transparent;
+    children: [ "inputbar", "mode-switcher", "listview" ];
 }
 
 inputbar {
-    background-color: rgba(255, 255, 255, 0.1);
-    text-color: @foreground;
-    border-radius: 15px;
-    padding: 8px;
-    children: [prompt, entry]; /* Hides the list count */
+    enabled: true;
+    spacing: 0px;
+    margin: 0px 0px 12px 0px; /* reduced bottom margin */
+    padding: 0px;
+    border: 0px;
+    border-radius: 0px;
+    background-color: transparent;
+    text-color: inherit;
+    children: [ "entry" ];
+}
+
+entry {
+    enabled: true;
+    padding: 10px 14px; /* reduced padding */
+    border: 1px;
+    border-color: rgba(255, 255, 255, 0.12);
+    border-radius: 18px; /* smaller radius */
+    background-color: rgba(120, 120, 128, 0.28);
+    text-color: #ffffff;
+    cursor: text;
+    placeholder: "Search apps...";
+    placeholder-color: rgba(235, 235, 245, 0.68);
+    font: "SF Pro Display 14"; /* smaller font */
+}
+
+mode-switcher {
+    enabled: true;
+    spacing: 2px;
+    margin: 0px 0px 20px 0px; /* keep margin for separation */
+    padding: 4px; /* reduced padding */
+    border: 1px;
+    border-color: rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    background-color: rgba(120, 120, 128, 0.20);
+    text-color: inherit;
+}
+
+button {
+    padding: 8px 14px; /* smaller padding */
+    border: 0px;
+    border-radius: 12px;
+    background-color: transparent;
+    text-color: rgba(235, 235, 245, 0.75);
+    cursor: pointer;
+    font: "SF Pro Display 12"; /* smaller font */
+}
+
+button selected {
+    background-color: rgba(255, 255, 255, 0.95);
+    text-color: #1d1d1f;
+    border: 0px;
 }
 
 listview {
-    background-color: transparent;
+    enabled: true;
+    columns: 1;
+    lines: 6; /* fewer lines to reduce height */
+    cycle: true;
+    dynamic: true;
     scrollbar: false;
-    lines: 5;
+    layout: vertical;
+    reverse: false;
+    fixed-height: true;
+    fixed-columns: true;
+    spacing: 1px; /* reduced spacing */
     margin: 0px;
+    padding: 0px;
+    border: 0px;
+    border-radius: 0px;
+    background-color: transparent;
+    text-color: inherit;
+    cursor: "default";
 }
 
 element {
+    enabled: true;
+    spacing: 12px; /* reduced spacing */
+    margin: 0px 1px; /* smaller horizontal margin */
+    padding: 10px 14px; /* reduced padding */
+    border: 0px;
+    border-radius: 14px;
     background-color: transparent;
-    text-color: @foreground;
-    padding: 8px;
-    border-radius: 10px;
-    spacing: 10px;
+    text-color: inherit;
+    cursor: pointer;
+    orientation: horizontal;
 }
 
-element selected {
-    background-color: @selected;
-    text-color: @selected-text;
+button selected {
+    background-color: rgba(255, 255, 255, 0.95);
+    text-color: #1d1d1f;
+    border: 0px;
 }
 
-icon {
-    size: 24px;
-    background-color: inherit;
-    margin-right: 10px;
+element selected.normal {
+    background-color: rgba(0, 122, 255, 0.22);
+    text-color: #ffffff;
+    border: 1px;
+    border-color: rgba(0, 122, 255, 0.4);
 }
+
+element selected.active {
+    background-color: rgba(0, 122, 255, 0.30);
+    text-color: #ffffff;
+    border: 1px;
+    border-color: rgba(0, 122, 255, 0.5);
+}
+
+element-icon {
+    background-color: transparent;
+    text-color: inherit;
+    size: 28px; 
+    cursor: inherit;
+    margin: 0px;
+    border-radius: 8px;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+    expand: true;
+    horizontal-align: 0.0;
+    vertical-align: 0.5;
+    margin: 0px 0px 0px 10px; 
+    padding: 0px;
+    cursor: inherit;
+    font: "SF Pro Display 12"; }
