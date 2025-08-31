@@ -11,12 +11,15 @@
     ],
     "modules-right": [
         "pulseaudio",
-        "network",
+        "tray",
         "bluetooth",
         "battery",
         "clock",
     ],
 
+    "tray": {
+        "spacing": 10,
+    },
     "niri/window": {
         "all-outputs": true,
         "format-alt": "",
