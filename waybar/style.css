@@ -85,7 +85,7 @@ window#waybar.hidden {
   color: white;
 }
 #battery.plugged {
-  background-color: #cba6f7; /* Light Purple */
+  border: 2px solid #cba6f7; /* Light Purple */
   color: white;
 }
 
