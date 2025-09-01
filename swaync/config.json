@@ -1,26 +1,26 @@
 {
-  "control-center-height": 2,
+  "control-center-height": 0,
   "control-center-layer": "overlay",
-  "control-center-margin-bottom": 20,
+  "control-center-margin-bottom": 25,
   "control-center-margin-left": 0,
-  "control-center-margin-right": 10,
-  "control-center-margin-top": 20,
-  "control-center-width": 500,
-  "cssPriority": "application",
+  "control-center-margin-right": 25,
+  "control-center-margin-top": 25,
+  "control-center-width": 420,
+  "cssPriority": "user",
   "control-center-positionX": "right",
-  "control-center-positionY": "center",
+  "control-center-positionY": "top",
   "fit-to-screen": true,
-  "hide-on-action": false,
+  "hide-on-action": true,
   "hide-on-clear": true,
   "image-visibility": "when-available",
   "keyboard-shortcuts": true,
   "layer": "overlay",
-  "notification-body-image-height": 100,
-  "notification-body-image-width": 200,
-  "notification-icon-size": 40,
-  "notification-inline-replies": true,
+  "notification-body-image-height": 80,
+  "notification-body-image-width": 80,
+  "notification-icon-size": 48,
+  "notification-inline-replies": false,
   "notification-visibility": {},
-  "notification-window-width": 400,
+  "notification-window-width": 420,
   "positionX": "right",
   "positionY": "top",
   "script-fail-notify": true,
@@ -28,68 +28,113 @@
   "timeout": 10,
   "timeout-critical": 0,
   "timeout-low": 5,
-  "transition-time": 100,
-
+  "transition-time": 250,
   "widget-config": {
     "title": {
-      "text": "Notifications",
-      "button-text": "󰎟  Clear",
+      "text": "Notification Center",
+      "button-text": "Clear All",
       "clear-all-button": true
     },
+    "dnd": {
+      "text": "Do Not Disturb"
+    },
     "notifications": {
-      "position": "top-right",
-      "layer": "overlay",
-      "margin": "10,20,0,0",
-      "width": 350,
-      "height": 100,
-      "max_visible": 5,
-      "sort": "-time"
+      "text": ""
+    },
+    "mpris": {
+      "image-size": 80,
+      "image-radius": 12,
+      "blur": false
+    },
+    "volume": {
+      "label": "Volume",
+      "show-per-app": false
+    },
+    "backlight": {
+      "label": "Display Brightness",
+      "device": "intel_backlight",
+      "subsystem": "backlight"
     },
     "buttons-grid": {
       "actions": [
         {
-          "active": false,
-          "command": "kitty /home/batman/.config/swaync/scripts/toggle_dnd.sh 2>/dev/null",
-          "label": "󰤄",
-          "type": "toggle"
+          "label": "󰖩",
+          "command": "nmcli radio wifi | grep -q enabled && nmcli radio wifi off || nmcli radio wifi on",
+          "type": "toggle",
+          "update-command": "nmcli radio wifi | grep -q enabled"
         },
         {
-          "active": false,
-          "command": "swaync-client -d",
-          "label": "",
-          "type": "toggle"
+          "label": "󰂯",
+          "command": "rfkill list bluetooth | grep -q 'Soft blocked: no' && rfkill block bluetooth || rfkill unblock bluetooth",
+          "type": "toggle",
+          "update-command": "rfkill list bluetooth | grep -q 'Soft blocked: no'"
         },
         {
-          "active": false,
-          "command": "obs",
+          "label": "󰍃",
+          "command": "pkill -USR1 gammastep || gammastep -O 4500 &",
+          "type": "toggle",
+          "update-command": "pgrep gammastep"
+        },
+        {
           "label": "󰄀",
+          "command": "grim -g \"$(slurp)\" ~/Pictures/Screenshots/screenshot-$(date +%Y%m%d-%H%M%S).png && notify-send 'Screenshot' 'Screenshot saved'",
           "type": "button"
         },
         {
-          "active": false,
-          "command": "obs",
           "label": "󰕧",
+          "command": "grim ~/Pictures/Screenshots/fullscreen-$(date +%Y%m%d-%H%M%S).png && notify-send 'Screenshot' 'Full screen captured'",
           "type": "button"
+        },
+        {
+          "label": "󰒓",
+          "command": "systemctl --user is-active --quiet redshift && systemctl --user stop redshift || systemctl --user start redshift",
+          "type": "toggle",
+          "update-command": "systemctl --user is-active --quiet redshift"
         }
       ]
     },
-    "mpris": {
-      "image-radius": 12,
-      "image-size": 96
-    },
-    "volume": {
-      "label": "",
-      "show-per-app": true,
-      "show-per-app-icon": true,
-      "show-per-app-label": true
+    "menubar": {
+      "menu#powermode": {
+        "label": "󰈐",
+        "position": "right",
+        "actions": [
+          {
+            "label": "Performance",
+            "command": "powerprofilesctl set performance && notify-send 'Power Profile' 'Performance mode activated'"
+          },
+          {
+            "label": "Balanced",
+            "command": "powerprofilesctl set balanced && notify-send 'Power Profile' 'Balanced mode activated'"
+          },
+          {
+            "label": "Power Saver",
+            "command": "powerprofilesctl set power-saver && notify-send 'Power Profile' 'Power saver mode activated'"
+          }
+        ]
+      },
+      "menu#network": {
+        "label": "󰖩",
+        "position": "right",
+        "actions": [
+          {
+            "label": "Network Settings",
+            "command": "nm-connection-editor"
+          },
+          {
+            "label": "WiFi Settings",
+            "command": "iwgtk"
+          }
+        ]
+      }
     }
   },
-
   "widgets": [
     "title",
-    "notifications",
-    "buttons-grid",
+    "dnd",
+    "notifications",  
     "mpris",
-    "volume"
+    "volume",
+    "backlight",
+    "menubar"
   ]
 }
