@@ -1,5 +1,4 @@
 {
-  "$schema": "~/.config/swaync/configSchema.json",
   "control-center-height": 2,
   "control-center-layer": "overlay",
   "control-center-margin-bottom": 20,
@@ -15,7 +14,7 @@
   "hide-on-clear": true,
   "image-visibility": "when-available",
   "keyboard-shortcuts": true,
-  "layer": "layer",
+  "layer": "overlay",
   "notification-body-image-height": 100,
   "notification-body-image-width": 200,
   "notification-icon-size": 40,
@@ -30,7 +29,22 @@
   "timeout-critical": 0,
   "timeout-low": 5,
   "transition-time": 100,
+
   "widget-config": {
+    "title": {
+      "text": "Notifications",
+      "button-text": "󰎟  Clear",
+      "clear-all-button": true
+    },
+    "notifications": {
+      "position": "top-right",
+      "layer": "overlay",
+      "margin": "10,20,0,0",
+      "width": 350,
+      "height": 100,
+      "max_visible": 5,
+      "sort": "-time"
+    },
     "buttons-grid": {
       "actions": [
         {
@@ -63,11 +77,6 @@
       "image-radius": 12,
       "image-size": 96
     },
-    "title": {
-      "text": "Notifications",
-      "button-text": "󰎟  Clear",
-      "clear-all-button": true      
-    },
     "volume": {
       "label": "",
       "show-per-app": true,
@@ -75,6 +84,7 @@
       "show-per-app-label": true
     }
   },
+
   "widgets": [
     "title",
     "notifications",
