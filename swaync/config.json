@@ -19,16 +19,21 @@
   "notification-body-image-width": 80,
   "notification-icon-size": 48,
   "notification-inline-replies": false,
-  "notification-visibility": {},
   "notification-window-width": 420,
   "positionX": "right",
   "positionY": "top",
   "script-fail-notify": true,
-  "scripts": {},
+  "scripts": {
+    "notification-sound": {
+      "exec": "if [ \"$SWAYNC_APP_NAME\" != \"Spotify\" ] && [ \"$SWAYNC_APP_NAME\" != \"spotify\" ] && [ \"$SWAYNC_APP_NAME\" != \"com.spotify.Client\" ]; then canberra-gtk-play -i message-new-instant; fi",
+      "run-on": "receive"
+    }
+  },
   "timeout": 10,
   "timeout-critical": 0,
   "timeout-low": 5,
   "transition-time": 250,
+
   "widget-config": {
     "title": {
       "text": "Notification Center",
