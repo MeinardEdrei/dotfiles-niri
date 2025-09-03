@@ -27,6 +27,16 @@
     "notification-sound": {
       "exec": "if [ \"$SWAYNC_APP_NAME\" != \"Spotify\" ] && [ \"$SWAYNC_APP_NAME\" != \"spotify\" ] && [ \"$SWAYNC_APP_NAME\" != \"com.spotify.Client\" ]; then canberra-gtk-play -i message-new-instant; fi",
       "run-on": "receive"
+    },
+    "open-screenshot": {
+      "exec": "~/dotfiles-niri/_scripts/screenshot-open.sh",
+      "run-on": "action",
+      "run-on-app": "Niri Screenshot"
+    },
+    "open-screenshot-folder": {
+      "exec": "~/dotfiles-niri/_scripts/screenshot-folder.sh", 
+      "run-on": "action",
+      "run-on-app": "Niri Screenshot"
     }
   },
   "timeout": 10,
