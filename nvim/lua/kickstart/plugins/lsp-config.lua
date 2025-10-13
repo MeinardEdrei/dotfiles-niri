@@ -131,17 +131,7 @@ return {
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-		-- Helper function to remove the problematic flag from the OmniSharp command
-		local function filter_cmd(default_cmd)
-			local new_cmd = {}
-			for _, arg in ipairs(default_cmd) do
-				-- This removes the single problematic argument that disables restore
-				if arg ~= "DotNet:enablePackageRestore=false" then
-					table.insert(new_cmd, arg)
-				end
-			end
-			return new_cmd
-		end
+		local util = require("lspconfig.util")
 
 		local servers = {
 			html = {},
@@ -163,6 +153,20 @@ return {
 						-- diagnostics = { disable = { 'missing-fields' } },
 					},
 				},
+			},
+			eslint = {
+				cmd = { "eslint_d", "--stdio" },
+				root_dir = function(fname)
+					local root = vim.fs.dirname(
+						vim.fs.find(
+							{ ".eslintrc.js", ".eslintrc.json", "package.json" },
+							{ path = fname, upward = true }
+						)[1] or fname
+					)
+					return root
+				end,
+				settings = {},
+				capabilities = capabilities,
 			},
 		}
 
@@ -199,6 +203,7 @@ return {
 			"hadolint",
 			"yamllint",
 			"prettier",
+			"csharpier",
 			"black",
 			"jq",
 			"jsonls",
