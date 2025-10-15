@@ -1,29 +1,93 @@
-palette = "catppuccin_mocha"
+format = """
+[](#1e1e2e)\
+$os\
+$username\
+[](bg:#313244 fg:#1e1e2e)\
+$directory\
+[](fg:#313244 bg:#45475a)\
+$git_branch\
+$git_status\
+[](fg:#45475a bg:#89b4fa)\
+$c\
+$elixir\
+$elm\
+$golang\
+$gradle\
+$haskell\
+$java\
+$julia\
+$nodejs\
+$nim\
+$rust\
+$scala\
+[](fg:#89b4fa bg:#74c7ec)\
+$docker_context\
+[](fg:#74c7ec bg:#b4befe)\
+[ ](fg:#b4befe)\
+"""
 
-[palettes.catppuccin_mocha]
-rosewater = "#f5e0dc"
-flamingo = "#f2cdcd"
-pink = "#f5c2e7"
-mauve = "#cba6f7"
-red = "#f38ba8"
-maroon = "#eba0ac"
-peach = "#fab387"
-yellow = "#f9e2af"
-green = "#a6e3a1"
-teal = "#94e2d5"
-sky = "#89dceb"
-sapphire = "#74c7ec"
-blue = "#89b4fa"
-lavender = "#b4befe"
-text = "#cdd6f4"
-subtext1 = "#bac2de"
-subtext0 = "#a6adc8"
-overlay2 = "#9399b2"
-overlay1 = "#7f849c"
-overlay0 = "#6c7086"
-surface2 = "#585b70"
-surface1 = "#45475a"
-surface0 = "#313244"
-base = "#1e1e2e"
-mantle = "#181825"
-crust = "#11111b"
+# Disable the blank line at the start of the prompt
+# add_newline = false
+
+[username]
+show_always = true
+style_user = "bg:#1e1e2e fg:#cdd6f4"
+style_root = "bg:#1e1e2e fg:#f38ba8"
+format = '[$user ]($style)'
+disabled = false
+
+[os]
+style = "bg:#1e1e2e fg:#cdd6f4"
+disabled = true
+
+[directory]
+style = "bg:#313244 fg:#cdd6f4"
+format = "[ $path ]($style)"
+truncation_length = 3
+truncation_symbol = "…/"
+
+[directory.substitutions]
+"Documents" = "󰈙 "
+"Downloads" = " "
+"Music" = " "
+"Pictures" = " "
+
+[git_branch]
+symbol = ""
+style = "bg:#45475a fg:#f9e2af"
+format = '[ $symbol $branch ]($style)'
+
+[git_status]
+style = "bg:#45475a fg:#fab387"
+format = '[$all_status$ahead_behind ]($style)'
+
+[c]
+symbol = " "
+style = "bg:#89b4fa fg:#1e1e2e"
+format = '[ $symbol ($version) ]($style)'
+
+[cpp]
+symbol = " "
+style = "bg:#89b4fa fg:#1e1e2e"
+format = '[ $symbol ($version) ]($style)'
+
+[docker_context]
+symbol = " "
+style = "bg:#74c7ec fg:#1e1e2e"
+format = '[ $symbol $context ]($style)'
+
+[nodejs]
+symbol = ""
+style = "bg:#89b4fa fg:#1e1e2e"
+format = '[ $symbol ($version) ]($style)'
+
+[rust]
+symbol = ""
+style = "bg:#89b4fa fg:#1e1e2e"
+format = '[ $symbol ($version) ]($style)'
+
+[time]
+disabled = false
+time_format = "%R"
+style = "bg:#b4befe fg:#1e1e2e"
+format = '[ ♥ $time ]($style)'
