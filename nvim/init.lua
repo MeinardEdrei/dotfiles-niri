@@ -120,6 +120,12 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
 
+	{ -- Colorizer
+		"catgoose/nvim-colorizer.lua",
+		event = "BufReadPre",
+		opts = { -- set to setup table
+		},
+	},
 	{ -- Gitsigns
 		"lewis6991/gitsigns.nvim",
 		opts = {
@@ -701,9 +707,34 @@ require("lazy").setup({
 		"catppuccin/nvim",
 		priority = 1000, -- Make sure to load this before all the other start plugins.
 		init = function()
-			-- Load the colorscheme here.
-			-- Like many other themes, this one has different styles, and you could load
-			-- any other, such as 'tokyonight-storm', 'tokyonight-moon', or 'tokyonight-day'.
+			require("catppuccin").setup({
+				flavour = "mocha",
+				transparent_background = false,
+				color_overrides = {
+					mocha = {
+						base = "#0f1115", -- deep but not pure black (main background)
+						mantle = "#16181d", -- slightly lighter layer for subtle contrast
+						crust = "#1c1f26", -- panels/status lines
+						surface0 = "#22252d", -- editor background layers
+						surface1 = "#2a2e37",
+						surface2 = "#343844",
+
+						text = "#d9d9e0", -- bright text for contrast
+						subtext1 = "#b4b4bc",
+						subtext0 = "#8d8d94",
+
+						mauve = "#c99bde", -- clean accent purple
+						green = "#9cd39c", -- balanced soft green
+						sky = "#89c4f4", -- calm sky blue
+						sapphire = "#7aa2f7", -- rich accent blue
+						blue = "#8fbaff",
+						lavender = "#c7caff",
+						peach = "#f4b88b", -- warm orange highlight
+						yellow = "#e6d37a", -- soft yellow for contrast
+					},
+				},
+			})
+
 			vim.g.catppuccin_flavour = "mocha" -- Options: latte, frappe, macchiato, mocha
 			vim.cmd.colorscheme("catppuccin")
 
