@@ -1,18 +1,18 @@
 {
     "layer": "top",
     "width": 1900,
-    // "spacing": 2,
+    "spacing": 2,
 
     "modules-left": [
         "niri/workspaces",
+        "tray",
+        "bluetooth",
     ],
     "modules-center": [
         "niri/window"
     ],
     "modules-right": [
         "pulseaudio",
-        "tray",
-        "bluetooth",
         "battery",
         "clock",
     ],
