@@ -20,7 +20,7 @@ return {
 			callback = function(event)
 				-- NOTE: Remember that Lua is a real programming language, and as such it is possible
 				-- to define small helper and utility functions so you don't have to repeat yourself.
-				--
+
 				-- In this case, we create a function that lets us more easily define mappings specific
 				-- for LSP related items. It sets the mode, buffer and description for us each time.
 				local map = function(keys, func, desc, mode)
@@ -106,15 +106,23 @@ return {
 			end,
 		})
 
-		-- Change diagnostic symbols in the sign column (gutter)
-		if vim.g.have_nerd_font then
-			local signs = { ERROR = "", WARN = "", INFO = "", HINT = "" }
-			local diagnostic_signs = {}
-			for type, icon in pairs(signs) do
-				diagnostic_signs[vim.diagnostic.severity[type]] = icon
-			end
-			vim.diagnostic.config({ signs = { text = diagnostic_signs } })
+		-- DIAGNOSTIC SIGNS
+		local signs = { ERROR = "", WARN = "", INFO = "", HINT = "" }
+		local diagnostic_signs = {}
+		for type, icon in pairs(signs) do
+			diagnostic_signs[vim.diagnostic.severity[type]] = icon
 		end
+		vim.diagnostic.config({
+			signs = { text = diagnostic_signs },
+			virtual_text = {
+				source = true,
+				prefix = "  ",
+			},
+			-- Set where the virtual text appears:
+			severity_sort = true,
+			underline = true,
+			update_in_insert = false,
+		})
 
 		-- LSP servers and clients are able to communicate to each other what features they support.
 		--  By default, Neovim doesn't support everything that is in the LSP specification.
@@ -125,19 +133,8 @@ return {
 
 		local servers = {
 			html = {},
-			-- clangd = {},
-			-- gopls = {},
-			-- pyright = {},
-			-- rust_analyzer = {},
-			-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-			--
-			-- Some languages (like typescript) have entire language plugins that can be useful:
-			--    https://github.com/pmizio/typescript-tools.nvim
-			--
-			-- But for many setups, the LSP (`ts_ls`) will work just fine
-			-- ts_ls = {},
-			--
-
+			pyright = {},
+			ts_ls = {},
 			lua_ls = {
 				-- cmd = { ... },
 				-- filetypes = { ... },
@@ -172,6 +169,7 @@ return {
 			"stylua", -- Used to format Lua code
 			"typescript-language-server",
 			"tailwindcss",
+			"lua_ls",
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
