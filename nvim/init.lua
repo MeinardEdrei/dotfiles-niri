@@ -138,18 +138,6 @@ require("lazy").setup({
 		opts = { -- set to setup table
 		},
 	},
-	-- { -- Gitsigns
-	-- 	"lewis6991/gitsigns.nvim",
-	-- 	opts = {
-	-- 		signs = {
-	-- 			add = { text = "+" },
-	-- 			change = { text = "~" },
-	-- 			delete = { text = "_" },
-	-- 			topdelete = { text = "‾" },
-	-- 			changedelete = { text = "~" },
-	-- 		},
-	-- 	},
-	-- },
 
 	{ -- Auto tag
 		"windwp/nvim-ts-autotag",
