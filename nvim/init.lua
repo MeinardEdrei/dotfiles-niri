@@ -147,26 +147,6 @@ require("lazy").setup({
 		end,
 	},
 
-	{ -- Lualine
-		"nvim-lualine/lualine.nvim",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		opts = {
-			options = {
-				theme = "auto",
-				section_separators = "",
-				component_separators = "",
-			},
-			sections = {
-				lualine_a = { "mode" },
-				lualine_b = { "branch" },
-				lualine_c = { "filename" },
-				lualine_x = { "encoding", "fileformat", "filetype" },
-				lualine_y = { "progress" },
-				lualine_z = { "location" },
-			},
-		},
-	},
-
 	-- { -- Auto Save
 	-- 	"pocco81/auto-save.nvim",
 	-- 	config = function()
@@ -460,6 +440,7 @@ require("lazy").setup({
 	require("kickstart.plugins.gitsigns"),
 	require("kickstart.plugins.telescope"),
 	require("kickstart.plugins.treesitter"),
+	require("kickstart.plugins.lualine"),
 
 	-- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
 	--    This is the easiest way to modularize your config.
