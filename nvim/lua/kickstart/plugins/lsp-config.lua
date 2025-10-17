@@ -170,6 +170,9 @@ return {
 			"typescript-language-server",
 			"tailwindcss",
 			"lua_ls",
+			"omnisharp",
+			"netcoredbg",
+			"eslint_d",
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
