@@ -173,6 +173,8 @@ return {
 			"omnisharp",
 			"netcoredbg",
 			"eslint_d",
+			"docker-language-server",
+			"docker-compose-language-service",
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
