@@ -8,6 +8,8 @@ vim.opt.tabstop = 2 -- Set tab width to 2 spaces
 vim.opt.shiftwidth = 2 -- Number of spaces for auto-indent
 vim.opt.softtabstop = 2 -- Makes backspace delete 2 spaces
 vim.opt.expandtab = true -- Converts tabs to spaces
+vim.opt.autoindent = true -- Copy the previous line's indent
+vim.opt.smartindent = true -- Intelligent indentation based on syntax
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.opt.mouse = "a"
@@ -299,7 +301,11 @@ require("lazy").setup({
 					end,
 				},
 				completion = { completeopt = "menu,menuone,noinsert" },
-
+				experimental = {
+					ghost_text = {
+						hl_group = "Comment", -- Use the Comment highlight group for a faded look
+					},
+				},
 				mapping = cmp.mapping.preset.insert({
 					-- Select the [n]ext item
 					["<C-n>"] = cmp.mapping.select_next_item(),
