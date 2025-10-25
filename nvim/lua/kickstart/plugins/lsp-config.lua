@@ -136,6 +136,9 @@ return {
 			pyright = {},
 			ts_ls = {},
 			lua_ls = {
+				dockerls = {},
+				docker_compose_language_service = {},
+				yamlls = {},
 				-- cmd = { ... },
 				-- filetypes = { ... },
 				-- capabilities = {},
@@ -175,6 +178,13 @@ return {
 			"eslint_d",
 			"docker-language-server",
 			"docker-compose-language-service",
+			"yaml-language-server",
+			"markdownlint",
+			"hadolint",
+			"yamllint",
+			"prettier", -- Universal formatter
+			"black", -- Formatter for Python
+			"jq", -- Utility for processing JSON
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
