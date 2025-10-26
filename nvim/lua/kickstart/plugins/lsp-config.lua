@@ -131,6 +131,18 @@ return {
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
+		-- Helper function to remove the problematic flag from the OmniSharp command
+		local function filter_cmd(default_cmd)
+			local new_cmd = {}
+			for _, arg in ipairs(default_cmd) do
+				-- This removes the single problematic argument that disables restore
+				if arg ~= "DotNet:enablePackageRestore=false" then
+					table.insert(new_cmd, arg)
+				end
+			end
+			return new_cmd
+		end
+
 		local servers = {
 			html = {},
 			pyright = {},
@@ -169,12 +181,16 @@ return {
 		-- for you, so that they are available from within Neovim.
 		local ensure_installed = vim.tbl_keys(servers or {})
 		vim.list_extend(ensure_installed, {
-			"stylua", -- Used to format Lua code
+			"html", -- General HTML LSP
+			"pyright", -- Python LSP
+			"ts_ls", -- TypeScript/JavaScript LSP
+			"lua_ls", -- Lua LSP (special config below)
+			"omnisharp", -- C# LSP (special config below)
+			"netcoredbg",
+			-- Formatters/Linters (installed by mason-tool-installer)
+			"stylua",
 			"typescript-language-server",
 			"tailwindcss",
-			"lua_ls",
-			"omnisharp",
-			"netcoredbg",
 			"eslint_d",
 			"docker-language-server",
 			"docker-compose-language-service",
@@ -182,11 +198,14 @@ return {
 			"markdownlint",
 			"hadolint",
 			"yamllint",
-			"prettier", -- Universal formatter
-			"black", -- Formatter for Python
-			"jq", -- Utility for processing JSON
+			"prettier",
+			"black",
+			"jq",
 			"jsonls",
 			"jsonlint",
+			-- Added for conform.nvim formatters
+			"isort",
+			"shfmt",
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
