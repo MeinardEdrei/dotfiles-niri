@@ -185,6 +185,8 @@ return {
 			"prettier", -- Universal formatter
 			"black", -- Formatter for Python
 			"jq", -- Utility for processing JSON
+			"jsonls",
+			"jsonlint",
 		})
 		require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 

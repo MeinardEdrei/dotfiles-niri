@@ -21,6 +21,7 @@ return {
 			lint.linters_by_ft["javascriptreact"] = { "eslint_d" }
 			lint.linters_by_ft["typescriptreact"] = { "eslint_d" }
 			lint.linters_by_ft["python"] = { "black" }
+			lint.linters_by_ft["json"] = { "jsonlint" }
 
 			--
 			-- However, note that this will enable a set of default linters,
