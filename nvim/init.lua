@@ -56,6 +56,9 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 10
 
+-- Ensure auto-session has all the options it needs
+vim.o.sessionoptions = "buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
 
@@ -363,6 +366,7 @@ require("lazy").setup({
 	require("kickstart.plugins.treesitter"),
 	require("kickstart.plugins.lualine"),
 	require("kickstart.plugins.autocompletion"),
+	require("kickstart.plugins.auto-session"),
 
 	-- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
 	--    This is the easiest way to modularize your config.
