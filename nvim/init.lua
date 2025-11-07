@@ -284,40 +284,53 @@ require("lazy").setup({
 
 	{ -- Theme
 		"catppuccin/nvim",
-		priority = 1000, -- Make sure to load this before all the other start plugins.
+		priority = 1000,
 		init = function()
 			require("catppuccin").setup({
 				flavour = "mocha",
 				transparent_background = false,
 				color_overrides = {
 					mocha = {
-						base = "#0f1115", -- deep but not pure black (main background)
-						mantle = "#16181d", -- slightly lighter layer for subtle contrast
-						crust = "#1c1f26", -- panels/status lines
-						surface0 = "#22252d", -- editor background layers
-						surface1 = "#2a2e37",
-						surface2 = "#343844",
+						-- Base Colors (Deep, consistent darkness)
+						base = "#0C0E12",
+						mantle = "#12151A",
+						crust = "#181C22",
+						surface0 = "#1F232B",
+						surface1 = "#262B34",
+						surface2 = "#303640",
+						-- Text Colors (Soft, comfortable gray tones)
+						text = "#B4B6C4",
+						subtext1 = "#9496A4",
+						subtext0 = "#787A88",
+						-- PRIMARY: Maroon/Red tones (your main accent color)
+						maroon = "#7AC5B4", -- Vibrant maroon as primary
+						red = "#D47272", -- Complementary red
+						flamingo = "#D48888", -- Lighter red-pink
+						pink = "#D495A5", -- Soft pink
+						rosewater = "#D4A8B0", -- Subtle rose
 
-						text = "#d9d9e0", -- bright text for contrast
-						subtext1 = "#b4b4bc",
-						subtext0 = "#8d8d94",
+						-- SECONDARY: Violet/Purple tones
+						mauve = "#D47272", -- Rich violet as secondary
+						lavender = "#9580D4", -- Light violet
 
-						mauve = "#c99bde", -- clean accent purple
-						green = "#9cd39c", -- balanced soft green
-						sky = "#89c4f4", -- calm sky blue
-						sapphire = "#7aa2f7", -- rich accent blue
-						blue = "#8fbaff",
-						lavender = "#c7caff",
-						peach = "#f4b88b", -- warm orange highlight
-						yellow = "#e6d37a", -- soft yellow for contrast
+						-- Supporting colors (balanced with your primary/secondary)
+						blue = "#7BA3D9",
+						sapphire = "#6B96C4",
+						sky = "#78B4CC",
+						green = "#88B88A",
+						yellow = "#C5A875",
+						peach = "#D4937D",
+						teal = "#7AC5B4",
+
+						-- Overlay colors (for selections, etc.)
+						overlay0 = "#3D424D",
+						overlay1 = "#484E5A",
+						overlay2 = "#535967",
 					},
 				},
 			})
-
-			vim.g.catppuccin_flavour = "mocha" -- Options: latte, frappe, macchiato, mocha
+			vim.g.catppuccin_flavour = "mocha"
 			vim.cmd.colorscheme("catppuccin")
-
-			-- You can configure highlights by doing something like:
 			vim.cmd.hi("Comment gui=none")
 		end,
 	},
