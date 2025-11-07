@@ -1,42 +1,50 @@
 return {
 	"rmagatti/auto-session",
-	event = "VimEnter",
+	lazy = false,
 	config = function()
-		local autosession = require("auto-session")
-
-		autosession.setup({
-			log_level = "info",
-			auto_session_enable_last_session = true, -- enable global last session fallback
+		require("auto-session").setup({
+			log_level = "error",
 			auto_session_root_dir = vim.fn.stdpath("data") .. "/sessions/",
 			auto_session_enabled = true,
 			auto_save_enabled = true,
-			auto_restore_enabled = true,
-			auto_session_suppress_dirs = { "~/" }, -- ignore home dir
-			pre_save_cmds = { "lua vim.cmd(':wa')" }, -- save all buffers before saving session
-			bypass_session_save_file_types = { "gitcommit", "fugitive" },
-			session_lens_enable = true,
-		})
-
-		-- Automatically save session when exiting Neovim inside Tmux
-		if os.getenv("TMUX") then
-			vim.api.nvim_create_autocmd("VimLeavePre", {
-				callback = function()
-					autosession.SaveSession()
+			auto_restore_enabled = true, -- This enables automatic restore!
+			auto_create_enabled = true,
+			auto_session_enable_last_session = true,
+			auto_session_suppress_dirs = { "~/", "/tmp", "/", vim.fn.expand("~") },
+			auto_session_use_git_branch = false,
+			-- Automatically restore without asking
+			auto_session_allowed_dirs = nil, -- Allow all dirs (except suppressed ones)
+			-- Save all buffers before creating session
+			pre_save_cmds = {
+				function()
+					-- Close neo-tree if open to avoid issues
+					if vim.fn.exists(":Neotree") > 0 then
+						vim.cmd("silent! Neotree close")
+					end
 				end,
-			})
-		end
-
-		-- Automatically restore project session if exists, else fallback to last global session
-		vim.api.nvim_create_autocmd("VimEnter", {
+			},
+			-- Restore neo-tree after session loads
+			post_restore_cmds = {
+				function()
+					-- Small delay to ensure buffers are loaded
+					vim.defer_fn(function()
+						if vim.fn.exists(":Neotree") > 0 then
+							vim.cmd("silent! Neotree show")
+						end
+					end, 100)
+				end,
+			},
+			-- Don't save these file types
+			bypass_session_save_file_types = { "gitcommit", "fugitive" },
+			-- This is the key setting for automatic behavior!
+			-- By default it will restore session for current directory
+			-- If no session exists for current dir, it will use last session
+			args_allow_single_directory = true,
+		})
+		-- Force save on ANY exit (even SIGTERM/SIGKILL where possible)
+		vim.api.nvim_create_autocmd({ "VimLeavePre", "VimLeave" }, {
 			callback = function()
-				local cwd = vim.fn.getcwd()
-				local project_session = autosession.SearchSession({ cwd = cwd })
-				if project_session then
-					autosession.RestoreSession({ session = project_session })
-				elseif vim.o.sessionoptions:match("buffers") then
-					-- fallback to last session globally
-					autosession.RestoreSession()
-				end
+				require("auto-session").SaveSession()
 			end,
 		})
 	end,
