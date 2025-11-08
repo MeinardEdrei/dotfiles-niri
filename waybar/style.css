@@ -6,7 +6,7 @@
 
 #window {
   color: white;
-  background-color: #161616;
+  background-color: black;
   padding: 5px 50px;
   min-width: 17em;
   border-bottom-left-radius: 20px;
@@ -22,24 +22,24 @@ window#waybar.hidden {
 }
 
 #workspaces {
-  background-color: #161616;
+  background-color: black;
   border-radius: 20px;
   padding: 0px 10px;
   margin-top: 5px;
 }
 #workspaces button {
   all: initial;
-  min-width: 10px;
+  min-width: 5px;
   margin: 7px 3px;
   border-radius: 20px;
-  background-color: #f8f9fa;
+  background-color: gray;
   opacity: 0.5;
   transition: all 0.2s ease-in-out;
-  color: white;
+  color: #f8f9fa;
 }
 #workspaces button.active {
   opacity: 1;
-  min-width: 40px;
+  min-width: 12px;
   border-radius: 10px;
   background-color: #f8f9fa;
   color: white;
@@ -59,7 +59,7 @@ window#waybar.hidden {
   margin-top: 5px;
   border-radius: 20px;
   padding: 3px 12px;
-  background-color: #161616;
+  background-color: black;
   color: white;
 }
 
