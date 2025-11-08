@@ -109,14 +109,14 @@ input {
 layout {
     // Set gaps around windows in logical pixels.
     gaps 8
-
+    default-column-display "tabbed"
     // When to center a column when changing focus, options are:
     // - "never", default behavior, focusing an off-screen column will keep at the left
     //   or right edge of the screen.
     // - "always", the focused column will always be centered.
     // - "on-overflow", focusing a column will center it if it doesn't fit
     //   together with the previously focused column.
-    center-focused-column "never"
+    center-focused-column "on-overflow"
 
     // You can customize the widths that "switch-preset-column-width" (Mod+R) toggles between.
     preset-column-widths {
@@ -133,6 +133,11 @@ layout {
 
     // You can also customize the heights that "switch-preset-window-height" (Mod+Shift+R) toggles between.
     // preset-window-heights { }
+    preset-window-heights {
+        proportion 0.3  // 30% of column height
+        proportion 0.5  // 50% of column height
+        proportion 0.7  // 70% of column height
+    }
 
     // You can change the default width of the new windows.
     default-column-width { proportion 0.5; }
@@ -152,10 +157,7 @@ layout {
 
     // You can change how the focus ring looks.
     focus-ring {
-        // Uncomment this line to disable the focus ring.
         off
-
-        // How many logical pixels the ring extends out from the windows.
         width 4
 
         // Colors can be set in a variety of ways:
@@ -163,19 +165,8 @@ layout {
         // - RGB hex: "#rgb", "#rgba", "#rrggbb", "#rrggbbaa"
         // - CSS-like notation: "rgb(255, 127, 0)", rgba(), hsl() and a few others.
 
-        // Color of the ring on the active monitor.
         active-color "#0a0a0a"
-
-        // Color of the ring on inactive monitors.
         inactive-color "#505050"
-
-        // You can also use gradients. They take precedence over solid colors.
-        // Gradients are rendered the same as CSS linear-gradient(angle, from, to).
-        // The angle is the same as in linear-gradient, and is optional,
-        // defaulting to 180 (top-to-bottom gradient).
-        // You can use any CSS linear-gradient tool on the web to set these up.
-        // Changing the color space is also supported, check the wiki for more info.
-        //
         // active-gradient from="#80c8ff" to="#bbddff" angle=45
 
         // You can also color the gradient relative to the entire view
@@ -185,7 +176,6 @@ layout {
         // inactive-gradient from="#505050" to="#808080" angle=45 relative-to="workspace-view"
     }
 
-    // You can also add a border. It's similar to the focus ring, but always visible.
     border {
         // The settings are the same as for the focus ring.
         // If you enable the border, you probably want to disable the focus ring.
@@ -245,10 +235,24 @@ layout {
     // Top and bottom struts will simply add outer gaps in addition to the area occupied by
     // layer-shell panels and regular gaps.
     struts {
-        // left 64
-        // right 64
+        left 15
+        right 15
         // top 64
         // bottom 64
+    }
+
+    tab-indicator {
+        width 3
+        gap 7
+        length total-proportion=0.16
+        position "top"
+        place-within-column
+    }
+
+    insert-hint {
+        // off
+        color "#ffc87f80"
+        gradient from="#ffbb6680" to="#ffc88080" angle=45 relative-to="workspace-view"
     }
 }
 
@@ -292,7 +296,7 @@ animations {
     // off
 
     // Slow down all animations by this factor. Values below 1 speed them up instead.
-    slowdown 1.7
+    slowdown 1.6
 }
 
 // Window rules let you adjust behavior for individual windows.
