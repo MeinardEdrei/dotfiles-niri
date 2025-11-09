@@ -2,7 +2,6 @@
     "layer": "top",
     "width": 1900,
     "spacing": 2,
-
     "modules-left": [
         "niri/workspaces",
         "tray",
@@ -16,7 +15,6 @@
         "battery",
         "clock",
     ],
-
     "tray": {
         "spacing": 10,
     },
@@ -33,11 +31,11 @@
         "warp-on-scroll": false,
         "format": "{icon}",
         "format-icons": {
-             "urgent": "",
-             "active": "",
-             "default": ""
-         }    
-     },
+            "urgent": "",
+            "active": "",
+            "default": ""
+        }
+    },
     "bluetooth": {
         "format": "",
         "on-click": "blueberry"
@@ -62,7 +60,13 @@
         "format-charging": "{capacity}% 󰂄",
         "format-plugged": "{capacity}% ",
         "format-alt": "{time} {icon}",
-        "format-icons": ["󰁻", "󰁽", "󰁿", "󰂁", "󰁹"],
+        "format-icons": [
+            "󰁻",
+            "󰁽",
+            "󰁿",
+            "󰂁",
+            "󰁹"
+        ],
     },
     "network": {
         "format-wifi": "",
@@ -86,7 +90,11 @@
             "phone": "",
             "portable": "",
             "car": "",
-            "default": ["", "", ""]
+            "default": [
+                "",
+                "",
+                ""
+            ]
         },
         "on-click": "pavucontrol"
     },
