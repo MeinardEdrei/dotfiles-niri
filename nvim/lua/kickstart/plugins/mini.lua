@@ -1,4 +1,5 @@
 local mini_files_km = require("config.mini-files")
+local mini_files_git = require("config.mini-files-git")
 
 return {
 	"nvim-mini/mini.files",
@@ -18,16 +19,16 @@ return {
 			trim_right = ">",
 		})
 
-		-- -- Custom keymaps
-		-- opts.custom_keymaps = {
-		-- 	open_tmux_pane = "<M-t>",
-		-- 	copy_to_clipboard = "<space>yy",
-		-- 	zip_and_copy = "<space>yz",
-		-- 	paste_from_clipboard = "<space>p",
-		-- 	copy_path = "<M-c>",
-		-- 	preview_image = "<space>i",
-		-- 	preview_image_popup = "<M-i>",
-		-- }
+		-- Custom keymaps
+		opts.custom_keymaps = {
+			open_tmux_pane = "<M-t>",
+			copy_to_clipboard = "<space>yy",
+			zip_and_copy = "<space>yz",
+			paste_from_clipboard = "<space>p",
+			copy_path = "<M-c>",
+			preview_image = "<space>i",
+			preview_image_popup = "<M-i>",
+		}
 
 		-- Window options
 		opts.windows = vim.tbl_deep_extend("force", opts.windows or {}, {
@@ -75,5 +76,8 @@ return {
 		require("mini.files").setup(opts)
 		-- Load custom keymaps
 		mini_files_km.setup(opts)
+		-- Load Git integration
+		-- git config is slowing mini.files too much, so disabling it
+		mini_files_git.setup()
 	end,
 }
