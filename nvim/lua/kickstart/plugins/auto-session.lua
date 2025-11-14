@@ -11,7 +11,7 @@ return {
 
 		require("auto-session").setup({
 			log_level = "error",
-			auto_session_root_dir = vim.fn.expand("~/dotfiles-niri") .. "/nvim-sessions/",
+			auto_session_root_dir = vim.fn.stdpath("data") .. "/sessions/",
 			auto_session_enabled = true,
 			auto_save_enabled = true,
 			auto_restore_enabled = true,
