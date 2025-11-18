@@ -1,0 +1,14 @@
+gui:
+  tabWidth: 4
+  theme:
+    activeBorderColor:
+      - "#f8f8f2"
+      - bold
+    inactiveBorderColor:
+      - "#6272a4"
+    optionsTextColor:
+      - blue
+    selectedLineBgColor:
+      - "#44475a"
+    defaultFgColor:
+      - default
