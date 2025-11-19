@@ -2,6 +2,12 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.g.have_nerd_font = false
 vim.opt.number = true
+vim.opt.cmdheight = 1
+
+-- Suppress the 'Press ENTER' prompt after many commands and messages.
+-- 'shortmess' tells Neovim what messages to skip pausing for.
+-- 'A' skips the "hit ENTER" prompt on new file/buffer creation.
+vim.opt.shortmess:append("A")
 
 -- [Code Indention]
 vim.opt.tabstop = 2 -- Set tab width to 2 spaces
