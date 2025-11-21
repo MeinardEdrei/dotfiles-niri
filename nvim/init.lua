@@ -129,6 +129,16 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
 
+	{
+		"folke/snacks.nvim",
+		priority = 1000,
+		lazy = false,
+		version = false,
+		opts = {
+			image = { enabled = true },
+		},
+	},
+
 	{ -- Git Conflicts
 		"akinsho/git-conflict.nvim",
 		config = true, -- Simply requires the plugin and runs default setup

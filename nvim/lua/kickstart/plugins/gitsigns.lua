@@ -8,6 +8,8 @@ return {
 	},
 	{
 		"lewis6991/gitsigns.nvim",
+		-- This forces the plugin to load on file read, fixing the "missing signs" issue.
+		event = { "BufReadPre", "BufNewFile" },
 		opts = {
 			on_attach = function(bufnr)
 				local gitsigns = require("gitsigns")
