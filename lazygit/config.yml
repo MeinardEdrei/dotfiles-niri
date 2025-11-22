@@ -5,20 +5,41 @@ gui:
   scrollOffMargin: 2
   scrollHeight: 10
   nerdFontsVersion: "3"
-
+  # Make the time look like "2h" or "4d" instead of full dates
+  timeFormat: "02 Jan 06"
+  shortTimeFormat: "3:04PM"
   theme:
+    # ACTIVE BORDER: Matte Grey
     activeBorderColor:
-      - "#CBA6F7" # Mauve (Soft Purple) - Gentle and distinct
+      - "#585b70"
       - bold
+    # INACTIVE BORDER: Pure Black
+    # (I set this back to Black because having grey borders on inactive windows
+    # adds "visual noise" and makes the screen look cluttered)
     inactiveBorderColor:
-      - "#585B70" # Overlay Grey - Low contrast
+      - "#343434"
+    # TEXT COLORS
     optionsTextColor:
-      - "#89B4FA" # Soft Blue - Readable but not piercing
+      - "#89b4fa"
     selectedLineBgColor:
-      - "#313244" # Surface0 (Dark Grey-Blue) - No glare
-    # Default text color (Soft White)
+      - "#1e1e2e"
     defaultFgColor:
-      - "#CDD6F4"
-    # Search highlight (Soft Yellow)
+      - "#9399b2"
     searchingActiveBorderColor:
-      - "#F9E2AF"
+      - "#fab387"
+git:
+  # This removes the technical "diff --git a/..." header noise
+  parseEmoji: true
+  pagers:
+    - colorArg: always
+      # THE CLEANER PREVIEW CONFIG
+      # 1. --line-numbers: Adds line numbers so you know where you are.
+      # 2. --hyperlinks: Allows clicking file paths.
+      # 3. --minus/plus-style: Uses dark blocks instead of bright text colors.
+      pager: >-
+        delta --dark --paging=never --line-numbers --hyperlinks --syntax-theme=Dracula --minus-style="syntax #3f2d3d" --plus-style="syntax #2d3f34" --minus-emph-style="normal #5a303c" --plus-emph-style="normal #3a5242" --file-style="omit" --hunk-header-style="omit"
+  # Cleaner Log Graph
+  branchLogCmd: >-
+    git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --
+  allBranchesLogCmds:
+    - git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=medium
