@@ -1,14 +1,24 @@
 gui:
+  # UI VISUALS
+  border: "rounded"
   tabWidth: 4
+  scrollOffMargin: 2
+  scrollHeight: 10
+  nerdFontsVersion: "3"
+
   theme:
     activeBorderColor:
-      - "#f8f8f2"
+      - "#CBA6F7" # Mauve (Soft Purple) - Gentle and distinct
       - bold
     inactiveBorderColor:
-      - "#6272a4"
+      - "#585B70" # Overlay Grey - Low contrast
     optionsTextColor:
-      - blue
+      - "#89B4FA" # Soft Blue - Readable but not piercing
     selectedLineBgColor:
-      - "#44475a"
+      - "#313244" # Surface0 (Dark Grey-Blue) - No glare
+    # Default text color (Soft White)
     defaultFgColor:
-      - default
+      - "#CDD6F4"
+    # Search highlight (Soft Yellow)
+    searchingActiveBorderColor:
+      - "#F9E2AF"

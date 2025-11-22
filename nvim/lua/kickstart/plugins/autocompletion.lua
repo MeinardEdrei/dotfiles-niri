@@ -90,12 +90,12 @@ return { -- Autocompletion
 		})
 
 		-- completion for commands
-		cmp.setup.cmdline(":", {
-			mapping = cmp.mapping.preset.cmdline(),
-			sources = {
-				{ name = "path" },
-				{ name = "cmdline" },
-			},
-		})
+		-- cmp.setup.cmdline(":", {
+		-- 	mapping = cmp.mapping.preset.cmdline(),
+		-- 	sources = {
+		-- 		{ name = "path" },
+		-- 		{ name = "cmdline" },
+		-- 	},
+		-- })
 	end,
 }

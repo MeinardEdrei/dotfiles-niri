@@ -1,7 +1,3 @@
--- Adds git related signs to the gutter, as well as utilities for managing changes
--- NOTE: gitsigns is already included in init.lua but contains only the base
--- config. This will add also the recommended keymaps.
-
 return {
 	{
 		"tpope/vim-fugitive",
@@ -11,6 +7,8 @@ return {
 		-- This forces the plugin to load on file read, fixing the "missing signs" issue.
 		event = { "BufReadPre", "BufNewFile" },
 		opts = {
+			word_diff = true,
+
 			on_attach = function(bufnr)
 				local gitsigns = require("gitsigns")
 
@@ -57,9 +55,11 @@ return {
 				map("n", "<leader>hD", function()
 					gitsigns.diffthis("@")
 				end, { desc = "git [D]iff against last commit" })
+
 				-- Toggles
 				map("n", "<leader>tb", gitsigns.toggle_current_line_blame, { desc = "[T]oggle git show [b]lame line" })
-				map("n", "<leader>tD", gitsigns.toggle_deleted, { desc = "[T]oggle git show [D]eleted" })
+				map("n", "<leader>tD", gitsigns.toggle_deleted, { desc = "[T]oggle git show [D]eleted (Overlay)" })
+				map("n", "<leader>tw", gitsigns.toggle_word_diff, { desc = "[T]oggle git [w]ord diff (Inline)" })
 			end,
 		},
 	},
