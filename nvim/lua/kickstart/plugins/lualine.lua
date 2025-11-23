@@ -38,15 +38,24 @@ end
 
 -- 2. Show active LSP clients (e.g., "lua_ls, null-ls")
 local function lsp_clients()
+	-- If screen is narrower than 120 chars, hide LSP entirely to save space
+	if vim.o.columns < 120 then
+		return ""
+	end
+
 	local bufnr = vim.api.nvim_get_current_buf()
 	local clients = vim.lsp.get_clients({ bufnr = bufnr })
 	if #clients == 0 then
 		return ""
 	end
+
 	local names = {}
 	for _, client in pairs(clients) do
 		table.insert(names, client.name)
 	end
+
+	-- if vim.o.columns < 120 then return " " end
+
 	return "  " .. table.concat(names, ", ")
 end
 
@@ -69,10 +78,9 @@ return {
 	opts = {
 		options = {
 			theme = "catppuccin",
-			-- THE BUBBLE LOOK
 			component_separators = "",
 			section_separators = { left = "", right = "" },
-			globalstatus = true, -- ONE statusline for all splits (Cleaner)
+			globalstatus = true,
 			disabled_filetypes = { statusline = { "dashboard", "alpha", "starter" } },
 		},
 		sections = {
@@ -82,31 +90,46 @@ return {
 			},
 			lualine_b = {
 				"branch",
-				{ "diff", symbols = { added = " ", modified = " ", removed = " " } },
+				{
+					"diff",
+					symbols = { added = " ", modified = " ", removed = " " },
+					cond = function()
+						return vim.o.columns > 120
+					end,
+				},
 				{
 					macro_recording,
-					color = { fg = "#ff9e64", gui = "bold" }, -- Orange warning color
+					color = { fg = "#ff9e64", gui = "bold" },
 				},
 			},
 			lualine_c = {
-				{ "filename", path = 1, symbols = { modified = "  ", readonly = "", unnamed = "" } },
+				-- FILENAME (Prioritized)
+				{
+					"filename",
+					path = 1,
+					symbols = { modified = "  ", readonly = "", unnamed = "" },
+				},
 			},
 
 			-- RIGHT SIDE
 			lualine_x = {
 				{
 					nearest_diagnostic,
-					color = { fg = "#f7768e", gui = "bold" }, -- Red/Pink for attention
+					color = { fg = "#f7768e", gui = "bold" },
 				},
 				{
 					"diagnostics",
 					sources = { "nvim_diagnostic" },
 					symbols = { error = " ", warn = " ", info = " " },
+					-- HIDE Standard Diagnostics if window is super tiny (< 80 cols)
+					cond = function()
+						return vim.o.columns > 80
+					end,
 				},
 				{
-					lsp_clients,
+					lsp_clients, -- This now checks width internally (see function above)
 					icon = "",
-					color = { fg = "#b4befe", gui = "italic" }, -- Soft blue
+					color = { fg = "#b4befe", gui = "italic" },
 				},
 			},
 			lualine_y = { "progress" },
