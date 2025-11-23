@@ -77,12 +77,10 @@
         "format-alt": "  {essid}"
     },
     "pulseaudio": {
-        "format": "{icon}   {volume}%",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format": "{icon}     {volume}%",
+        "format-bluetooth": "{icon} {volume}%",
         "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
-        "format-source": "{volume}% ",
-        "format-source-muted": "",
+        "format-muted": "    Muted",
         "format-icons": {
             "headphone": "",
             "hands-free": "",
@@ -90,12 +88,10 @@
             "phone": "",
             "portable": "",
             "car": "",
-            "default": [
-                "",
-                "",
-                ""
-            ]
+            "default": ["", "", ""]
         },
-        "on-click": "pavucontrol"
-    },
+        "scroll-step": 5,
+        "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle", // Click to mute
+        "on-click-right": "pavucontrol"
+    }
 }
