@@ -38,11 +38,12 @@ git:
     git log --graph --color=always --abbrev-commit --decorate --date=relative --pretty=medium {{branchName}} --
   allBranchesLogCmds:
     - git log --graph --all --color=always --abbrev-commit --decorate --date=relative  --pretty=medium
-# --- NEW SECTION ADDED BELOW ---
 customCommands:
-  - key: '<c-s>' # This binds to Control + S
+  - key: '<c-s>'
     context: 'commits'
-    description: 'View compilation of my commits (Summary)'
-    # This calculates the summary for the current user on the current branch
-    command: 'git shortlog --author="$(git config user.name)" HEAD --no-merges | less'
+    description: 'Open compilation in Neovim (for yanking)'
+    # 1. --pretty=format: Clean text format (No colors)
+    # 2. | nvim -R - : Reads the input into Neovim in Read-Only mode
+    # 3. -c "set ft=markdown": Sets syntax highlighting to Markdown so it looks pretty
+    command: 'git log --author="$(git config user.name)" --no-merges --date=format:"%a %b %d, %I:%M %p" --pretty=format:"## [%ad] %s%n%b%n" | nvim -R -c "set ft=markdown" -'
     output: terminal
