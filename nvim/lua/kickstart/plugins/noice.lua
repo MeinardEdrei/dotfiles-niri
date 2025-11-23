@@ -35,7 +35,7 @@ return {
 			cmdline_popup = {
 				position = { row = "40%", col = "50%" }, -- Placed at top-third of screen
 				size = {
-					width = "50%",
+					width = "auto",
 					height = "auto",
 				},
 				border = {
