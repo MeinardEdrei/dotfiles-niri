@@ -65,8 +65,104 @@ vim.opt.scrolloff = 10
 -- Ensure auto-session has all the options it needs
 vim.o.sessionoptions = "buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
+vim.api.nvim_create_autocmd("ColorScheme", {
+	pattern = "*",
+	callback = function()
+		-- 'WinSeparator' controls the split line color
+		vim.api.nvim_set_hl(0, "WinSeparator", { fg = "#4a4e69", bold = true })
+	end,
+})
+
+-- [[ Custom Tabline Appearance ]]
+vim.opt.showtabline = 2 
+
+-- 1. Define the Dark Color for the Separator
+--    We use an autocommand to ensure it stays dark even if you change themes.
+vim.api.nvim_create_autocmd("ColorScheme", {
+  pattern = "*",
+  callback = function()
+    -- fg = "#333333" is a very dark grey. Change this hex code if you want it darker/lighter.
+    vim.api.nvim_set_hl(0, "TabSeparator", { fg = "#333333", bg = "NONE" }) 
+  end,
+})
+
+_G.close_tab_by_id = function(tabnr)
+  vim.cmd("tabclose " .. tabnr)
+end
+
+_G.custom_tabline = function()
+  local s = ""
+  local current = vim.fn.tabpagenr()
+  local total = vim.fn.tabpagenr("$")
+
+  for i = 1, total do
+    -- Highlight focused vs unfocused tabs
+    if i == current then
+      s = s .. "%#TabLineSel#"
+    else
+      s = s .. "%#TabLine#"
+    end
+
+    -- Mouse click handler
+    s = s .. "%" .. i .. "T " 
+
+    -- Get buffer name
+    local winnr = vim.fn.tabpagewinnr(i)
+    local buflist = vim.fn.tabpagebuflist(i)
+    local buf = buflist[winnr]
+    local path = vim.api.nvim_buf_get_name(buf)
+    local name = ""
+
+    if path == "" then
+      name = "[No Name]"
+    else
+      local parent = vim.fn.fnamemodify(path, ":p:h:t")
+      local file = vim.fn.fnamemodify(path, ":t")
+      name = parent .. "/" .. file
+    end
+
+    -- Add name
+    s = s .. " " .. name .. " "
+
+    -- Add Exit Button [x]
+    s = s .. "%" .. i .. "@v:lua.close_tab_by_id@%#ErrorMsg# x %X"
+
+    -- === THE CHANGE IS HERE ===
+    -- Switch to our custom dark color, add the separator, then switch back to Fill
+    s = s .. "%#TabSeparator#│" 
+  end
+
+  s = s .. "%#TabLineFill#" 
+  return s
+end
+
+vim.opt.tabline = "%!v:lua.custom_tabline()"
+
 -- [[ Basic Keymaps ]]
 --  See `:help vim.keymap.set()`
+
+-- [[ Custom Tab Navigation - Home Row Edition ]]
+
+-- GO PREVIOUS: Hold Shift + h (Capital H)
+vim.keymap.set("n", "H", "<cmd>tabprevious<CR>", { desc = "Previous Tab" })
+-- GO NEXT: Hold Shift + l (Capital L)
+vim.keymap.set("n", "L", "<cmd>tabnext<CR>", { desc = "Next Tab" })
+-- NEW TAB: Press Space then n
+vim.keymap.set("n", "<leader>n", "<cmd>tabnew<CR>", { desc = "New Tab" })
+
+-- [[ Window & Split Management ]]
+
+-- Move current split into its own new Tab
+vim.keymap.set("n", "<leader>N", "<C-w>T", { desc = "[B]reak split to new Tab" })
+--    Split window Vertically (Left/Right)
+vim.keymap.set("n", "<leader>v", "<C-w>v", { desc = "Split [V]ertical" })
+--    Split window Horizontally (Up/Down)
+vim.keymap.set("n", "<leader>j", "<C-w>s", { desc = "Split Horizontal [-]" })
+--    If you are in a split, it closes the split.
+--    If you are in a single window, it closes the tab.
+vim.keymap.set("n", "<leader>x", "<cmd>close<CR>", { desc = "Close current Window/Split" })
+--    If you dragged borders and messed up sizes, this resets them to equal
+vim.keymap.set("n", "<leader>=", "<C-w>=", { desc = "Equalize Window Sizes" })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
@@ -113,55 +209,55 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 -- TMUX AUTO-RENAMING
-if os.getenv("TMUX") then
-  local autocmd = vim.api.nvim_create_autocmd
-  local augroup = vim.api.nvim_create_augroup
-  local tmux_group = augroup("TmuxWindowRename", { clear = true })
-
-  autocmd({ "BufEnter", "WinEnter", "FocusGained" }, {
-    group = tmux_group,
-    callback = function()
-      -- 1. Get the properties of the current buffer
-      local buftype = vim.bo.buftype
-      local filetype = vim.bo.filetype
-      local filename = vim.fn.expand("%:t")
-
-      -- 2. IGNORE "nofile" buffers (like floating windows, telescope, null-ls, etc.)
-      --    If we are in one of these, do nothing (keep the previous window name)
-      if buftype == "nofile" or buftype == "prompt" or buftype == "popup" then
-        return
-      end
-
-      -- 3. Handle specific plugins (optional optimization)
-      if filetype == "TelescopePrompt" or filetype == "neo-tree" or filetype == "lazy" then
-        return
-      end
-
-      -- 4. Set default name if filename is empty (e.g. new unsaved file)
-      if filename == "" or filename == nil then
-        filename = "[No Name]" -- Or just "nvim" if you prefer
-      end
-
-      -- 5. Handle Terminal buffers specially
-      if buftype == "terminal" then
-        filename = "term"
-      end
-
-      -- 6. Execute the rename command
-      vim.schedule(function()
-        vim.fn.system("tmux rename-window '" .. filename .. "'")
-      end)
-    end,
-  })
-
-  -- Reset when closing Neovim
-  autocmd("VimLeave", {
-    group = tmux_group,
-    callback = function()
-      vim.fn.system("tmux set-window-option automatic-rename on")
-    end,
-  })
-end
+-- if os.getenv("TMUX") then
+-- 	local autocmd = vim.api.nvim_create_autocmd
+-- 	local augroup = vim.api.nvim_create_augroup
+-- 	local tmux_group = augroup("TmuxWindowRename", { clear = true })
+--
+-- 	autocmd({ "BufEnter", "WinEnter", "FocusGained" }, {
+-- 		group = tmux_group,
+-- 		callback = function()
+-- 			-- 1. Get the properties of the current buffer
+-- 			local buftype = vim.bo.buftype
+-- 			local filetype = vim.bo.filetype
+-- 			local filename = vim.fn.expand("%:t")
+--
+-- 			-- 2. IGNORE "nofile" buffers (like floating windows, telescope, null-ls, etc.)
+-- 			--    If we are in one of these, do nothing (keep the previous window name)
+-- 			if buftype == "nofile" or buftype == "prompt" or buftype == "popup" then
+-- 				return
+-- 			end
+--
+-- 			-- 3. Handle specific plugins (optional optimization)
+-- 			if filetype == "TelescopePrompt" or filetype == "neo-tree" or filetype == "lazy" then
+-- 				return
+-- 			end
+--
+-- 			-- 4. Set default name if filename is empty (e.g. new unsaved file)
+-- 			if filename == "" or filename == nil then
+-- 				filename = "[No Name]" -- Or just "nvim" if you prefer
+-- 			end
+--
+-- 			-- 5. Handle Terminal buffers specially
+-- 			if buftype == "terminal" then
+-- 				filename = "term"
+-- 			end
+--
+-- 			-- 6. Execute the rename command
+-- 			vim.schedule(function()
+-- 				vim.fn.system("tmux rename-window '" .. filename .. "'")
+-- 			end)
+-- 		end,
+-- 	})
+--
+-- 	-- Reset when closing Neovim
+-- 	autocmd("VimLeave", {
+-- 		group = tmux_group,
+-- 		callback = function()
+-- 			vim.fn.system("tmux set-window-option automatic-rename on")
+-- 		end,
+-- 	})
+-- end
 
 -- [[ Install `lazy.nvim` plugin manager ]]
 --    See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim for more info
