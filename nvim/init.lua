@@ -163,6 +163,12 @@ vim.keymap.set("n", "<leader>j", "<C-w>s", { desc = "Split Horizontal [-]" })
 vim.keymap.set("n", "<leader>x", "<cmd>close<CR>", { desc = "Close current Window/Split" })
 --    If you dragged borders and messed up sizes, this resets them to equal
 vim.keymap.set("n", "<leader>=", "<C-w>=", { desc = "Equalize Window Sizes" })
+-- Maximize current split height
+vim.keymap.set("n", "<leader>zj", "<C-w>_", { desc = "Maximize current split height" })
+-- Maximize current split width
+vim.keymap.set("n", "<leader>zz", "<C-w>|", { desc = "Maximize current split width" })
+-- Reset/Equalize sizes (use this to "un-maximize" and reset all splits)
+vim.keymap.set("n", "<leader>zx", "<C-w>=", { desc = "Equalize Window Sizes" })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 --  See `:help hlsearch`
