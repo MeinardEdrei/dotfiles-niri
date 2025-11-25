@@ -362,9 +362,9 @@ binds {
     Mod+T hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
     Mod+D hotkey-overlay-title="Run an Application: rofi" { spawn "env" "DISPLAY=:0" "rofi" "-show" "drun"; }
     Mod+E hotkey-overlay-title="File explorer: nautilus" { spawn "nautilus"; }
-    Super+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
-
-    Mod+X { spawn "~/.config/rofi/scripts/power-menu.sh"; }
+    Mod+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
+    Mod+Slash hotkey-overlay-title="Emoji manager: emote" { spawn "emote"; }
+    Mod+X hotkey-overlay-title="Run Power Menu" { spawn "~/.config/rofi/scripts/power-menu.sh"; }
     // You can also use a shell. Do this if you need pipes, multiple commands, etc.
     // Note: the entire command goes as a single argument in the end.
     // Mod+T { spawn "bash" "-c" "notify-send hello && exec alacritty"; }
