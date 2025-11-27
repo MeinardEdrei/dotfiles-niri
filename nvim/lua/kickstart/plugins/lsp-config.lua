@@ -77,14 +77,10 @@ return {
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		capabilities = vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
-		-- === FIXING YOUR SERVERS TABLE ===
-		-- In your previous code, dockerls/yamlls were accidentally INSIDE the lua_ls table.
 		local servers = {
 			html = {},
 			pyright = {},
 			ts_ls = {},
-
-			-- Moved these OUT of lua_ls so they actually work
 			dockerls = {},
 			docker_compose_language_service = {},
 			yamlls = {},
@@ -93,22 +89,16 @@ return {
 				settings = {
 					Lua = {
 						completion = { callSnippet = "Replace" },
+						diagnostics = { disable = { "missing-fields" } },
 					},
 				},
 			},
+
 			eslint = {
-				cmd = { "eslint_d", "--stdio" },
-				root_dir = function(fname)
-					local root = vim.fs.dirname(
-						vim.fs.find(
-							{ ".eslintrc.js", ".eslintrc.json", "package.json" },
-							{ path = fname, upward = true }
-						)[1] or fname
-					)
-					return root
-				end,
-				settings = {},
-				capabilities = capabilities,
+				settings = {
+					-- This helps eslint find the configuration file
+					workingDirectory = { mode = "auto" },
+				},
 			},
 		}
 

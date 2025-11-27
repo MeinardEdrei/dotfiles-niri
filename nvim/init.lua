@@ -74,66 +74,66 @@ vim.api.nvim_create_autocmd("ColorScheme", {
 })
 
 -- [[ Custom Tabline Appearance ]]
-vim.opt.showtabline = 2 
+vim.opt.showtabline = 2
 
 -- 1. Define the Dark Color for the Separator
 --    We use an autocommand to ensure it stays dark even if you change themes.
 vim.api.nvim_create_autocmd("ColorScheme", {
-  pattern = "*",
-  callback = function()
-    -- fg = "#333333" is a very dark grey. Change this hex code if you want it darker/lighter.
-    vim.api.nvim_set_hl(0, "TabSeparator", { fg = "#333333", bg = "NONE" }) 
-  end,
+	pattern = "*",
+	callback = function()
+		-- fg = "#333333" is a very dark grey. Change this hex code if you want it darker/lighter.
+		vim.api.nvim_set_hl(0, "TabSeparator", { fg = "#333333", bg = "NONE" })
+	end,
 })
 
 _G.close_tab_by_id = function(tabnr)
-  vim.cmd("tabclose " .. tabnr)
+	vim.cmd("tabclose " .. tabnr)
 end
 
 _G.custom_tabline = function()
-  local s = ""
-  local current = vim.fn.tabpagenr()
-  local total = vim.fn.tabpagenr("$")
+	local s = ""
+	local current = vim.fn.tabpagenr()
+	local total = vim.fn.tabpagenr("$")
 
-  for i = 1, total do
-    -- Highlight focused vs unfocused tabs
-    if i == current then
-      s = s .. "%#TabLineSel#"
-    else
-      s = s .. "%#TabLine#"
-    end
+	for i = 1, total do
+		-- Highlight focused vs unfocused tabs
+		if i == current then
+			s = s .. "%#TabLineSel#"
+		else
+			s = s .. "%#TabLine#"
+		end
 
-    -- Mouse click handler
-    s = s .. "%" .. i .. "T " 
+		-- Mouse click handler
+		s = s .. "%" .. i .. "T "
 
-    -- Get buffer name
-    local winnr = vim.fn.tabpagewinnr(i)
-    local buflist = vim.fn.tabpagebuflist(i)
-    local buf = buflist[winnr]
-    local path = vim.api.nvim_buf_get_name(buf)
-    local name = ""
+		-- Get buffer name
+		local winnr = vim.fn.tabpagewinnr(i)
+		local buflist = vim.fn.tabpagebuflist(i)
+		local buf = buflist[winnr]
+		local path = vim.api.nvim_buf_get_name(buf)
+		local name = ""
 
-    if path == "" then
-      name = "[No Name]"
-    else
-      local parent = vim.fn.fnamemodify(path, ":p:h:t")
-      local file = vim.fn.fnamemodify(path, ":t")
-      name = parent .. "/" .. file
-    end
+		if path == "" then
+			name = "[No Name]"
+		else
+			local parent = vim.fn.fnamemodify(path, ":p:h:t")
+			local file = vim.fn.fnamemodify(path, ":t")
+			name = parent .. "/" .. file
+		end
 
-    -- Add name
-    s = s .. " " .. name .. " "
+		-- Add name
+		s = s .. " " .. name .. " "
 
-    -- Add Exit Button [x]
-    s = s .. "%" .. i .. "@v:lua.close_tab_by_id@%#ErrorMsg# x %X"
+		-- Add Exit Button [x]
+		s = s .. "%" .. i .. "@v:lua.close_tab_by_id@%#ErrorMsg# x %X"
 
-    -- === THE CHANGE IS HERE ===
-    -- Switch to our custom dark color, add the separator, then switch back to Fill
-    s = s .. "%#TabSeparator#│" 
-  end
+		-- === THE CHANGE IS HERE ===
+		-- Switch to our custom dark color, add the separator, then switch back to Fill
+		s = s .. "%#TabSeparator#│"
+	end
 
-  s = s .. "%#TabLineFill#" 
-  return s
+	s = s .. "%#TabLineFill#"
+	return s
 end
 
 vim.opt.tabline = "%!v:lua.custom_tabline()"
@@ -175,6 +175,13 @@ vim.keymap.set("n", "<leader>zx", "<C-w>=", { desc = "Equalize Window Sizes" })
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Diagnostic keymaps
+-- Move to the next diagnostic (error/warning) in the buffer
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "Go to next [D]iagnostic message" })
+-- Move to the previous diagnostic
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "Go to previous [D]iagnostic message" })
+-- Open a floating window with the error message (if it's truncated or you want to read it clearly)
+vim.keymap.set("n", "<leader>e", vim.diagnostic.open_float, { desc = "Show diagnostic [E]rror messages" })
+-- Open the list of all errors in the project (you already have this one mapped to <leader>q)
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Open diagnostic [Q]uickfix list" })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
@@ -280,6 +287,7 @@ vim.opt.rtp:prepend(lazypath)
 -- NOTE: LAZY SETUP
 
 require("lazy").setup({
+
 	"tpope/vim-sleuth", -- Detect tabstop and shiftwidth automatically
 
 	{
@@ -370,6 +378,7 @@ require("lazy").setup({
 	require("kickstart.plugins.theme"),
 	require("kickstart.plugins.conform"),
 	require("kickstart.plugins.which-key"),
+	require("kickstart.plugins.trouble"),
 
 	-- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
 	--    This is the easiest way to modularize your config.
