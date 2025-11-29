@@ -7,13 +7,13 @@ return {
 	keys = {
 		-- Toggle the diagnostic list
 		{
-			"<leader>xx",
+			"<leader>qQ",
 			"<cmd>Trouble diagnostics toggle<cr>",
 			desc = "Diagnostics (Trouble)",
 		},
 		-- Toggle the list only for the current file
 		{
-			"<leader>xX",
+			"<leader>q",
 			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
 			desc = "Buffer Diagnostics (Trouble)",
 		},
