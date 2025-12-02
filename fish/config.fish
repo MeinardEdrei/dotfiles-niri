@@ -25,3 +25,10 @@ function fish_user_key_bindings
     bind \ck history-search-backward
     bind \cj history-search-forward
 end
+
+if status is-interactive
+    if not set -q TMUX
+        # Check if tmux is already running and attach, otherwise create a new session
+        tmux attach -t default || tmux new -s default
+    end
+end
