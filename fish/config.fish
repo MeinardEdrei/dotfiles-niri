@@ -14,4 +14,14 @@ set -x PATH $ANDROID_HOME/platform-tools $ANDROID_HOME/tools $ANDROID_HOME/tools
 # set -g PATH $HOME/Android/Sdk/cmdline-tools/latest/bin $HOME/Android/Sdk/platform-tools $HOME/Android/Sdk/emulator $PATH
 
 # flutter
-set -U fish_user_paths /opt/flutter/bin $fish_user_paths
+# set -U fish_user_paths /opt/flutter/bin $fish_user_paths
+
+function fish_user_key_bindings
+    # 1. Bind Ctrl+y to accept the autosuggestion
+    bind \cy accept-autosuggestion
+
+    # 2. Bind Ctrl+k (Up) and Ctrl+j (Down) for history search
+    # removing '-M insert' fixes the issue for standard mode
+    bind \ck history-search-backward
+    bind \cj history-search-forward
+end
