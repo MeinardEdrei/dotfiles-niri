@@ -20,7 +20,7 @@ return {
 			lint.linters_by_ft["typescript"] = { "eslint_d" }
 			lint.linters_by_ft["javascriptreact"] = { "eslint_d" }
 			lint.linters_by_ft["typescriptreact"] = { "eslint_d" }
-			lint.linters_by_ft["python"] = { "black" }
+			-- lint.linters_by_ft["python"] = { "black" }
 			lint.linters_by_ft["json"] = { "jsonlint" }
 
 			--

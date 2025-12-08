@@ -360,7 +360,7 @@ binds {
 
     // Suggested binds for running programs: terminal, app launcher, screen locker.
     Mod+T hotkey-overlay-title="Open a Terminal: kitty" { spawn "kitty"; }
-    Mod+D hotkey-overlay-title="Run an Application: rofi" { spawn "env" "DISPLAY=:0" "rofi" "-show" "drun"; }
+    Mod+S hotkey-overlay-title="Run an Application: rofi" { spawn "env" "DISPLAY=:0" "rofi" "-show" "drun"; }
     Mod+E hotkey-overlay-title="File explorer: nautilus" { spawn "nautilus"; }
     Mod+Alt+L hotkey-overlay-title="Lock the Screen: hyprlock" { spawn "hyprlock"; }
     Mod+Slash hotkey-overlay-title="Emoji manager: emote" { spawn "emote"; }
