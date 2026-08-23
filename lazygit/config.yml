@@ -28,10 +28,10 @@ gui:
 git:
   # This removes the technical "diff --git a/..." header noise
   parseEmoji: true
-  pagers:
+  diffRenderers:
     - colorArg: always
       # THE CLEANER PREVIEW CONFIG
-      pager: >-
+      command: >-
         delta --dark --paging=never --line-numbers --hyperlinks --syntax-theme=Dracula --minus-style="syntax #3f2d3d" --plus-style="syntax #2d3f34" --minus-emph-style="normal #5a303c" --plus-emph-style="normal #3a5242" --file-style="omit" --hunk-header-style="omit"
   # Cleaner Log Graph
   branchLogCmd: >-
