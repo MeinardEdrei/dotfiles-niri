@@ -1,0 +1,16 @@
+gui:
+  border: "rounded"
+  scrollHeight: 2
+  theme:
+    # ACTIVE BORDER: Matte Grey
+    activeBorderColor:
+      - "#585b70"
+      - bold
+    # INACTIVE BORDER: Pure Black
+    inactiveBorderColor:
+      - "#343434"
+    # TEXT COLORS
+    optionsTextColor:
+      - "#89b4fa"
+    selectedLineBgColor:
+      - "#1e1e2e"

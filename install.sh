@@ -84,6 +84,7 @@ declare -A SYMLINKS=(
     ["tmux"]="tmux"
     ["waybar"]="waybar"
     ["lazygit"]="lazygit"
+    ["lazydocker"]="lazydocker"
     ["niri"]="niri"
     ["noctalia"]="noctalia"
 )

@@ -376,16 +376,16 @@ window-rule {
 // Example: enable rounded corners for all windows.
 // Exclude Resolve: clip/radius on Qt5/Xwayland can tear the window down.
 window-rule {
-    exclude app-id=r#"(?i)^resolve$"#
-    exclude title=r#"(?i)davinci|project manager"#
+    exclude app-id=r#"(?i)^resolve(\.bin)?$"#
+    exclude title=r#"(?i)davinci|project manager|problem report"#
     geometry-corner-radius 12
     clip-to-geometry true
 }
 
 // Enable background blur for all transparent windows
 window-rule {
-    exclude app-id=r#"(?i)^resolve$"#
-    exclude title=r#"(?i)davinci|project manager"#
+    exclude app-id=r#"(?i)^resolve(\.bin)?$"#
+    exclude title=r#"(?i)davinci|project manager|problem report"#
     background-effect {
         blur true
         xray true
@@ -403,8 +403,8 @@ window-rule {
 // DaVinci Resolve LAST so these win over global maximize/blur/radius.
 // Qt5/X11 splash + Project Manager silently tear down if tiled/maximized.
 window-rule {
-    match app-id=r#"(?i)^resolve$"#
-    match title=r#"(?i)davinci|project manager"#
+    match app-id=r#"(?i)^resolve(\.bin)?$"#
+    match title=r#"(?i)davinci|project manager|problem report"#
     open-floating true
     open-maximized false
     open-fullscreen false

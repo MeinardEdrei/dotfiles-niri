@@ -110,6 +110,7 @@ phpmyadmin
 # Containers
 docker-compose
 docker
+lazydocker
 
 # Fonts & theming
 inter-font
