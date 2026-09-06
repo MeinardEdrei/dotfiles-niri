@@ -377,3 +377,4 @@ show_condition = false
 
 [widget.workspaces]
 pill_scale = 0.40000000000000002
+show_labels = false
